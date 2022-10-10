@@ -20,13 +20,6 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  { id: 1, licensePlate: 'ABC-123', name: 'Volvo' },
-  { id: 2, licensePlate: 'XYZ-456', name: 'Mercedes' },
-];
-
-
-
 
 const TruckDatagridComponent:FC=props=> {
     const [truckArray, setTruckArray] = useState<Array<Truck>>([]);
@@ -46,12 +39,12 @@ const TruckDatagridComponent:FC=props=> {
 
 
     return(
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={truckArray}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
           checkboxSelection
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}

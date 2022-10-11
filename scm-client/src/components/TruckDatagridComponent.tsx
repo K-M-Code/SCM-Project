@@ -13,6 +13,7 @@ const columns: GridColDef[] = [
     headerName: 'License Plate',
     width: 150,
     editable: true,
+    headerAlign: 'center',
   },
   {
     field: 'name',

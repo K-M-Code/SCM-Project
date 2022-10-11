@@ -1,15 +1,1 @@
-scm-client/.idea/
-scm-client/.vscode/
-scm-client/node_modules/
-scm-client/build/
-scm-client/.DS_Store
-scm-client/*.tgz
-scm-client/my-app*
-scm-client/template/src/__tests__/__snapshots__/
-scm-client/lerna-debug.log
-scm-client/npm-debug.log*
-scm-client/yarn-debug.log*
-scm-client/yarn-error.log*
-scm-client//.changelog
-scm-client/.npm/
 id_rsa.pub

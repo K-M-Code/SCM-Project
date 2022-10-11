@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Truck } from '../type/Truck';
 import { getTruckData } from '../controllers/TruckController';
+import styles from './datagrid.module.css'; 
+
 
 const columns: GridColDef[] = [
   {
@@ -39,7 +41,8 @@ const TruckDatagridComponent:FC=props=> {
 
 
     return(
-        <Box sx={{ height: 600, width: '100%' }}>
+      <div className={styles.datagrid}>        
+        <Box sx={{ height: 600, width: '50%' }}>
         <DataGrid
           rows={truckArray}
           columns={columns}
@@ -49,7 +52,8 @@ const TruckDatagridComponent:FC=props=> {
           disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
         />
-      </Box>
+        </Box>
+      </div>
     )
 }
 

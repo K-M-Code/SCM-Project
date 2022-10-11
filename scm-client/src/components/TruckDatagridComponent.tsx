@@ -20,6 +20,7 @@ const columns: GridColDef[] = [
     headerName: 'Name',
     width: 150,
     editable: true,
+    headerAlign: 'center',
   },
 ];
 

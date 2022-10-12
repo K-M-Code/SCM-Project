@@ -2,4 +2,6 @@ ssh -L 3306:mariadb.vamk.fi:3306 e2002009@shell.puv.fi
 
 java -jar scm-server/target/server-0.0.1-SNAPSHOT.jar
 
-docker build -t kmcode/scm-docker-dev .
+docker build --no-cache -t kmcode/scm-docker-dev .
+
+apt-get install net-tools

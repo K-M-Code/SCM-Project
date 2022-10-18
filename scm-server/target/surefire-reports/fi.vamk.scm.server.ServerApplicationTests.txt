@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: fi.vamk.scm.server.ServerApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.529 s - in fi.vamk.scm.server.ServerApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.092 s <<< FAILURE! - in fi.vamk.scm.server.ServerApplicationTests
+contextLoads  Time elapsed: 0.017 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
+Caused by: java.sql.SQLNonTransientConnectionException: Socket fail to connect to host:address=(host=kmserver)(port=3306)(type=primary). Connection refused: no further information
+Caused by: java.net.ConnectException: Connection refused: no further information
+

@@ -1,0 +1,36 @@
+version: '3'
+name: scm-project
+
+services:
+  scm-db:
+    image: mariadb:latest
+    container_name: scm-db
+    environment:
+      MARIADB_ROOT_PASSWORD: SuperSekretPassword
+      MARIADB_DATABASE: scm_db
+      MARIADB_USER: scm_user
+      MARIADB_PASSWORD: scm_user_pass
+    ports:
+      - "6033:3306"
+    volumes:
+      - type: bind
+        source: ./dockerData/mysql_data
+        target: /var/lib/mysql
+    networks:
+      - scm-network
+  scm-server:
+    image: kmcode/scm-server
+    container_name: scm-server
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - scm-db
+    networks:
+      - scm-network
+
+
+volumes:
+  scm-dbdata:
+
+networks:
+  scm-network:

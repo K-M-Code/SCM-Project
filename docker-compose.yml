@@ -11,15 +11,19 @@ services:
       MARIADB_USER: scm_user
       MARIADB_PASSWORD: scm_user_pass
     ports:
-      - "6033:3306"
+      - "3306:3306"
     volumes:
       - type: bind
         source: ./dockerData/mysql_data
         target: /var/lib/mysql
     networks:
       - scm-network
+
   scm-server:
     image: kmcode/scm-server
+    build:
+      context: scm-server
+      dockerfile: ./serverDockerFile
     container_name: scm-server
     ports:
       - "8080:8080"
@@ -28,9 +32,18 @@ services:
     networks:
       - scm-network
 
-
-volumes:
-  scm-dbdata:
+  scm-client:
+    image: kmcode/scm-client
+    build:
+      context: scm-client
+      dockerfile: ./clientDockerFile
+    container_name: scm-client
+    ports:
+      - "9090:80"
+    depends_on: 
+      - scm-server
+    networks:
+      - scm-network
 
 networks:
   scm-network:

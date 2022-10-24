@@ -19,6 +19,18 @@ services:
     networks:
       - scm-network
 
+  scm-adminer:
+    image: adminer:latest
+    container_name: scm-adminer
+    ports:
+      - 8000:8080
+    depends_on:
+      - scm-db
+    environment:
+      ADMINER_DEFAULT_SERVER: scm-db
+    networks:
+      - scm-network
+
   scm-server:
     image: kmcode/scm-server
     build:

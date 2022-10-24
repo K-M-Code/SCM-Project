@@ -21,6 +21,7 @@
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

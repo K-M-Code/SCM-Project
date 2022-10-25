@@ -1,10 +1,10 @@
 import { Truck } from '../type/Truck';
 
 export async function getTruckData(): Promise<any> {
-    const response = await fetch('/api/truck');
-    if(!response.ok) {
-        throw new Error(response.statusText);
+    const truckResponse = await fetch('/api/truck');
+    if(!truckResponse.ok) {
+        throw new Error(truckResponse.statusText);
     } else {
-        return response.json();
+        return truckResponse.json();
     }
 }

@@ -9,6 +9,13 @@ import styles from './datagrid.module.css';
 
 const columns: GridColDef[] = [
   {
+    field: 'id',
+    headerName: 'ID',
+    width: 25,
+    editable: true,
+    headerAlign: 'center',
+  },
+  {
     field: 'licencePlate',
     headerName: 'License Plate',
     width: 150,
@@ -31,9 +38,9 @@ const TruckDatagridComponent:FC=props=> {
     async function readTruckData() {
         await getTruckData()
         .catch(console.error)
-        .then(response=>{
-            setTruckArray(response);
-            console.log(JSON.stringify(response));
+        .then(truckResponse=>{
+            setTruckArray(truckResponse);
+            console.log(JSON.stringify(truckResponse));
         })
     }
 
@@ -42,16 +49,17 @@ const TruckDatagridComponent:FC=props=> {
     }, [])
 
 
+
     return(
       <div className={styles.datagrid}>        
         <Box sx={{ height: 600, width: '100%' }}>
-        <DataGrid
+        <DataGrid 
           rows={truckArray}
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
-          disableSelectionOnClick
+          // disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
         />
         </Box>

@@ -1,7 +1,7 @@
 import {useState, useEffect, FC} from 'react';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Truck } from '../type/Truck';
 import { getTruckData } from '../controllers/TruckController';
 import styles from './datagrid.module.css'; 
@@ -18,7 +18,7 @@ const columns: GridColDef[] = [
   {
     field: 'licencePlate',
     headerName: 'License Plate',
-    width: 150,
+    width: 125,
     editable: true,
     headerAlign: 'center',
   },

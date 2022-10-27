@@ -1,11 +1,11 @@
-import {useState, useEffect, FC} from 'react';
+import { FC } from 'react';
 import TruckDatagridComponent from '../components/TruckDatagridComponent';
-import styles from './truckContainer.module.css'; 
+// import styles from './container.module.css'; 
 
 const TruckContainer:FC=props=> {
     return(
         <div className='fullBody'>
-            <h1>SCM Application</h1>
+            <h1>Truck Collection</h1>
             
             <TruckDatagridComponent/>
             

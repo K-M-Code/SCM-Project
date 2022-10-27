@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TruckContainer from './containers/TruckContainer';
+import Navigation from './components/Navigation';
+import scmRoutes from './components/scmRoutes';
+
 
 
 function App() {
   return (
     <div className="App">
-      <TruckContainer/>
+      <Navigation/>
+      {scmRoutes}
     </div>
   );
 }

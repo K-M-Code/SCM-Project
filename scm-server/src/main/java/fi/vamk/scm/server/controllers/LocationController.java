@@ -69,8 +69,8 @@ public class LocationController {
         updateLocation.get().setId(locationDetails.getId());
         updateLocation.get().setNo(locationDetails.getNo());
         updateLocation.get().setName(locationDetails.getName());
-        updateLocation.get().setLat(locationDetails.getLat());
-        updateLocation.get().setLong_(locationDetails.getLong_());
+        updateLocation.get().setLatitude(locationDetails.getLatitude());
+        updateLocation.get().setLongitude(locationDetails.getLongitude());
         updateLocation.get().setProcessingCost(locationDetails.getProcessingCost());
         updateLocation.get().setMaxHrCap(locationDetails.getMaxHrCap());
         updateLocation.get().setSla(locationDetails.getSla());

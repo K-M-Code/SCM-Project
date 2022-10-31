@@ -56,7 +56,7 @@ const TruckDatagridComponent:FC=props=> {
         <DataGrid 
           rows={truckArray}
           columns={columns}
-          pageSize={10}
+          pageSize={11}
           rowsPerPageOptions={[10]}
           checkboxSelection
           // disableSelectionOnClick

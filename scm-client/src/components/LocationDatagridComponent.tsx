@@ -23,14 +23,14 @@ const columns: GridColDef[] = [
     headerAlign: 'center',
   },
   {
-    field: 'lat',
+    field: 'latitude',
     headerName: 'Latitude',
     width: 100,
     editable: true,
     headerAlign: 'center',
   },
   {
-    field: 'long_',
+    field: 'longitude',
     headerName: 'Longitude',
     width: 100,
     editable: true,

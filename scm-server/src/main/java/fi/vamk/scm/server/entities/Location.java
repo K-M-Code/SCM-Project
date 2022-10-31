@@ -19,28 +19,28 @@ public class Location implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LOCATION_ID_GENERATOR")
 	private int id;
 	
-//	@Column(name="'lat'")
-	private double lat;
+//	@Column(name="latitude")
+	private double latitude;
 
-//	@Column(name="'long'")
-	private double long_;
+//	@Column(name="longitude")
+	private double longitude;
 
-//	@Column(name="'max_hr_cap'")
+//	@Column(name="max_hr_cap")
 	private double maxHrCap;
 	
 
-//    @Column(name="'name'")
+//    @Column(name="name")
 	private String name;
     
 
-//    @Column(name="'no'")
+//    @Column(name="no")
 	private int no;
 
-//	@Column(name="'processing_cost'")
+//	@Column(name="processing_cost")
 	private double processingCost;
 
 
-//    @Column(name="'sla'")
+//    @Column(name="sla")
 	private double sla;
 
 	public Location() {
@@ -54,20 +54,20 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 
-	public double getLat() {
-		return this.lat;
+	public double getLatitude() {
+		return this.latitude;
 	}
 
-	public void setLat(double lat) {
-		this.lat = lat;
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 
-	public double getLong_() {
-		return this.long_;
+	public double getLongitude() {
+		return this.longitude;
 	}
 
-	public void setLong_(double long_) {
-		this.long_ = long_;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public double getMaxHrCap() {

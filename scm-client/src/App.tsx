@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navigation from './components/Navigation';
-import scmRoutes from './components/scmRoutes';
+import scmRoutes from './pages/scmRoutes';
 
 
 

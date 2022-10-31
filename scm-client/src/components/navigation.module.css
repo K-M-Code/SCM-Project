@@ -3,9 +3,13 @@
     text-decoration: none !important;
 }
 .navLink:visited {
-    color: #fff;
+    color: #fff !important;
 }
 
 .navLink:hover {
-    color: rgb(238, 107, 0);
+    color: rgb(238, 107, 0) !important;
+}
+
+header {
+    background-color:rgba(1, 29, 153, 50) !important;
 }

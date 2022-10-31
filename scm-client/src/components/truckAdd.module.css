@@ -1,0 +1,12 @@
+.textInputBox {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.textInput {
+    margin: 0 10px !important;
+}
+
+.buttonInput {
+    margin: 0 10px !important;
+}

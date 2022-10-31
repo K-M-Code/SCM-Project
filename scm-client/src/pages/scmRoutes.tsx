@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import LocationPage from '../pages/Location';
-import TruckPage from '../pages/Truck';
-import HomePage from '../pages/Home';
+import LocationPage from './Location';
+import TruckPage from './Truck';
+import HomePage from './Home';
 
 const scmRoutes =  (
     

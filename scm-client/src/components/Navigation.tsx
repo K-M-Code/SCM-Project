@@ -37,7 +37,9 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const scmLinks = [
+  let scmLinks;
+
+  const protectedLinks = [
     {
       id: 1,
       path: "/",
@@ -54,6 +56,24 @@ function ResponsiveAppBar() {
       text: "Location",
     },
   ]
+
+
+  const unProtectedLinks = [
+    {
+      id: 1,
+      path: "/",
+      text: "Home",
+    },
+    {
+      id: 2,
+      path: "../pages/Truck",
+      text: "Truck",
+    }
+  ]
+
+  const isAuthenticated = true;
+
+  isAuthenticated ? scmLinks=protectedLinks : scmLinks=unProtectedLinks;
 
   return (
 
@@ -144,7 +164,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SCM - KM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {scmLinks.map((scmLink) => (

@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table (name = "location")
 @NamedQuery(name="Location.findAll", query="SELECT l FROM Location l")
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,22 +18,29 @@ public class Location implements Serializable {
 	@SequenceGenerator(name="LOCATION_ID_GENERATOR" )
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LOCATION_ID_GENERATOR")
 	private int id;
-
+	
+//	@Column(name="'lat'")
 	private double lat;
 
-	@Column(name="long")
+//	@Column(name="'long'")
 	private double long_;
 
-	@Column(name="max_hr_cap")
+//	@Column(name="'max_hr_cap'")
 	private double maxHrCap;
+	
 
+//    @Column(name="'name'")
 	private String name;
+    
 
+//    @Column(name="'no'")
 	private int no;
 
-	@Column(name="processing_cost")
+//	@Column(name="'processing_cost'")
 	private double processingCost;
 
+
+//    @Column(name="'sla'")
 	private double sla;
 
 	public Location() {

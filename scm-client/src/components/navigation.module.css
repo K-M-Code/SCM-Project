@@ -1,0 +1,11 @@
+.navLink:link {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.navLink:visited {
+    color: #fff;
+}
+
+.navLink:hover {
+    color: rgb(238, 107, 0);
+}

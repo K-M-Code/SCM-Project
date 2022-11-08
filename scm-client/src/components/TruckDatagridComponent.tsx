@@ -52,7 +52,7 @@ const TruckDatagridComponent:FC=props=> {
 
     return(
       <div className={styles.datagrid}>        
-        <Box sx={{ height: 635, width: '100%' }}>
+        <Box sx={{ height: 630, width: '100%' }}>
         <DataGrid 
           rows={truckArray}
           columns={columns}

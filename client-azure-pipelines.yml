@@ -17,6 +17,7 @@ steps:
 
 - script: |
     cd scm-client
+    rm -r node_modules/*
     npm install
     npm run build
   displayName: 'npm install and build'

@@ -52,11 +52,11 @@ const TruckDatagridComponent:FC=props=> {
 
     return(
       <div className={styles.datagrid}>        
-        <Box sx={{ height: 600, width: '100%' }}>
+        <Box sx={{ height: 635, width: '100%' }}>
         <DataGrid 
           rows={truckArray}
           columns={columns}
-          pageSize={11}
+          pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
           // disableSelectionOnClick

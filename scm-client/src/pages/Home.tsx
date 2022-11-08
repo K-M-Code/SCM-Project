@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import { Helmet } from 'react-helmet';
 
+
 const TITLE = 'SCM - Home';
 
 const HomePage:FC=props=> {

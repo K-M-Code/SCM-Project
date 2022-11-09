@@ -14,7 +14,7 @@ const LocationPage:FC=props=> {
         </Helmet>
         
         <LocationContainer/>
-        <LocationMap/>
+        {/* <LocationMap/> */}
             
         </div>
     )

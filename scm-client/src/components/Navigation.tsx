@@ -56,6 +56,11 @@ function ResponsiveAppBar() {
       path: "../pages/Location",
       text: "Location",
     },
+    {
+      id: 4,
+      path: "../pages/About",
+      text: "About",
+    },
   ]
 
 

@@ -1,2 +1,2 @@
 id_rsa.pub
-scm-client/node_modules
+scm-client/node_modules/*

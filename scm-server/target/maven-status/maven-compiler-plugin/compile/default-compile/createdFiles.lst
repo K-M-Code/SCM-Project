@@ -1,0 +1,4 @@
+fi\vamk\scm\server\controllers\TruckController.class
+fi\vamk\scm\server\ServerApplication.class
+fi\vamk\scm\server\repositories\TruckRepository.class
+fi\vamk\scm\server\entities\Truck.class

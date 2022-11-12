@@ -1,10 +1,8 @@
 package fi.vamk.scm.server.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,101 +14,225 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fi.vamk.scm.server.entities.Location;
-import fi.vamk.scm.server.repositories.LocationRepository;
+import fi.vamk.scm.server.service.LocationService;
 
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
-    @Autowired private LocationRepository locationRepository;
     
-
+    @Autowired
+    public LocationService locationService;
     
-    //Get All Location
-    @GetMapping
-    public List<Location> readAll(){
-        return locationRepository.findAll();
+    @GetMapping("")
+    public ResponseEntity<List<Location>> getAllLocations(){
+        return locationService.getAllLocations();
     }
-    
 
-    
-    //Get Location by ID
     @GetMapping("/{id}")
-    public Optional<Location> getLocation(@PathVariable Integer id){
-        return locationRepository.findById(id);
+    public ResponseEntity<Location> getLocationById(@PathVariable(value = "id") Integer id){
+        return locationService.getLocationById(id);
     }
 
-    
-    //Post/Add Location
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody Location location){
-        return ResponseEntity.status(HttpStatus.CREATED).body(locationRepository.save(location));
+    @PostMapping("")
+    public ResponseEntity<Location> createNewLocation(@RequestBody Location location){
+        return locationService.createNewLocation(location);
     }
-    
-    //Delete Location    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
-        Optional<Location> delLocation = locationRepository.findById(id);
-        if(!delLocation.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
 
-        locationRepository.deleteById(id);
-        return ResponseEntity.ok().build();
-    }
-    
-    //Update Location
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody Location locationDetails, @PathVariable(value = "id") Integer id){
-        Optional<Location> updateLocation = locationRepository.findById(id);
-        if(!updateLocation.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        updateLocation.get().setId(locationDetails.getId());
-        updateLocation.get().setNo(locationDetails.getNo());
-        updateLocation.get().setName(locationDetails.getName());
-        updateLocation.get().setLatitude(locationDetails.getLatitude());
-        updateLocation.get().setLongitude(locationDetails.getLongitude());
-        updateLocation.get().setProcessingCost(locationDetails.getProcessingCost());
-        updateLocation.get().setMaxHrCap(locationDetails.getMaxHrCap());
-        updateLocation.get().setSla(locationDetails.getSla());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(locationRepository.save(updateLocation.get()));
+    public ResponseEntity<Location> updateLocationById(@PathVariable(value = "id") Integer id, @RequestBody Location location){
+        return locationService.updateLocationById(location, id);
     }
 
-    
-//    @PostMapping
-//    public ResponseEntity<?> createLocation(@RequestBody Location Location) throws URISyntaxException {
-//        Location savedLocation = repository.save(Location);
-//        return ResponseEntity.created(new URI("/location/" + savedLocation.getId())).body(savedLocation);
-//    }
-//    
-//    @PostMapping
-//    public ResponseEntity<?> createLocation(@RequestBody Location item) throws URISyntaxException {
-//        Location savedLocation = locationRepository.save(item);
-//        return ResponseEntity.created(new URI("/location/" + savedLocation.getId())).body(item);
-//    }
-    
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> updateLocation(@PathVariable Integer id, @RequestBody Location item) {
-//        Location currentLocation = locationRepository.findById(id).orElseThrow(RuntimeException::new);
-//        currentLocation.setName(item.getName());
-//        currentLocation = locationRepository.save(item);
-//
-//        return ResponseEntity.ok(currentLocation);
-//    }
-    
-//    @PostMapping
-//    @Transactional
-//    public ResponseEntity<?> create(@RequestBody Location item){
-//        return ResponseEntity.status(HttpStatus.CREATED).body(locationRepository.save(item));
-//    }
-    
-//    @PutMapping("/{id}")
-//    public ResponseEntity updateLocation(@PathVariable in id, @RequestBody Location item) {
-//        
-//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Location> deleteLocationById(@PathVariable(value = "id") Integer id){
+        return locationService.deleteLocationById(id);
+    }
 
 
 }
 
+
+
+
+
+
+    //Get All Location
+//    @GetMapping
+//    public List<Location> readAll(){
+//        return locationRepository.findAll();
+//    }
+//    
+//
+//    
+//    //Get Location by ID
+//    @GetMapping("/{id}")
+//    public Optional<Location> getLocation(@PathVariable int id){
+//        return locationRepository.findById(id);
+//    }
+//
+//    
+//    //Post/Add Location
+//    @PostMapping
+//    public ResponseEntity<?> create(@RequestBody Location location){
+//        return ResponseEntity.status(HttpStatus.CREATED).body(locationRepository.save(location));
+//    }
+
+    
+    // Update Location by ID or Post new Location
+    // @PutMapping("/{id}")
+    // public ResponseEntity<?> update(@RequestBody Location locationDetails, @PathVariable int id){
+    //     return locationRepository.findById(id)
+    //     .map(Location -> {
+    //     Location.setName(locationDetails.getName());
+    //     Location.setLatitude(locationDetails.getLatitude());
+    //     Location.setLongitude(locationDetails.getLongitude());
+    //     Location.setMaxHrCap(locationDetails.getMaxHrCap());
+    //     Location.setNo(locationDetails.getNo());
+    //     Location.setProcessingCost(locationDetails.getProcessingCost());
+    //     Location.setSla(locationDetails.getSla());
+    //     return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(Location));
+    //     })
+    //     .orElseGet(() -> {
+    //         locationDetails.setId(id);
+    //         return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(locationDetails));
+    //     });
+    // }
+
+    // Partially Update Location by ID or Post new Location including checking if a double is null
+//    @PutMapping("/{id}")
+//    public ResponseEntity<?> update(@RequestBody Location locationDetails, @PathVariable int id){
+//        return locationRepository.findById(id)
+//        .map(Location -> {
+//        if(locationDetails.getName() != null){
+//            Location.setName(locationDetails.getName());
+//        }
+//        if (Double.valueOf(locationDetails.getLatitude()) != null){
+//            Location.setLatitude(locationDetails.getLatitude());
+//        }
+//        if (Double.valueOf(locationDetails.getLongitude()) != null){
+//            Location.setLongitude(locationDetails.getLongitude());
+//        }
+//        if (Double.valueOf(locationDetails.getMaxHrCap()) != null){
+//            Location.setMaxHrCap(locationDetails.getMaxHrCap());
+//        }
+//        if (Integer.valueOf(locationDetails.getNo()) != null){
+//            Location.setNo(locationDetails.getNo());
+//        }
+//        if (Double.valueOf(locationDetails.getProcessingCost()) != null){
+//            Location.setProcessingCost(locationDetails.getProcessingCost());
+//        }
+//        if (Double.valueOf(locationDetails.getSla()) != null){
+//            Location.setSla(locationDetails.getSla());
+//        }
+//        return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(Location));
+//        })
+//        .orElseGet(() -> {
+//            locationDetails.setId(id);
+//            return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(locationDetails));
+//        });
+//    }
+
+    // Create Patch method for updating Location
+    
+    //Delete Location by ID
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> delete(@PathVariable int id){
+//        return locationRepository.findById(id)
+//        .map(Location -> {
+//            locationRepository.deleteById(id);
+//            return ResponseEntity.ok().build();
+//        })
+//        .orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+
+
+
+
+    // Partially Update Location by ID or Post new Location including checking if a double is null
+
+    
+//     //Delete Location by ID
+//     @DeleteMapping("/{id}")
+//     public ResponseEntity<?> delete(@PathVariable int id){
+//         if(!locationRepository.existsById(id)){
+//             return ResponseEntity.notFound().build();
+//         }
+//         locationRepository.deleteById(id);
+//         return ResponseEntity.ok().build();
+//     }
+// }
+//     @PutMapping("/{id}")
+//     public ResponseEntity<?> update(@RequestBody Location locationDetails, @PathVariable int id){
+//         return locationRepository.findById(id)
+//         .map(Location -> {
+//         if(locationDetails.getName() != null) Location.setName(locationDetails.getName());
+//         if(locationDetails.getLatitude() != null) Location.setLatitude(locationDetails.getLatitude());
+//         if(locationDetails.getLongitude() != null) Location.setLongitude(locationDetails.getLongitude());
+//         if(locationDetails.getMaxHrCap() != null) Location.setMaxHrCap(locationDetails.getMaxHrCap());
+//         if(locationDetails.getNo() != null) Location.setNo(locationDetails.getNo());
+//         if(locationDetails.getProcessingCost() != null) Location.setProcessingCost(locationDetails.getProcessingCost());
+//         if(locationDetails.getSla() != null) Location.setSla(locationDetails.getSla());
+//         return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(Location));
+//         })
+//         .orElseGet(() -> {
+//             locationDetails.setId(id);
+//             return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(locationDetails));
+//         });
+//     }
+
+    // @PutMapping("/{id}")
+    // public ResponseEntity<?> update(@RequestBody Location locationDetails, @PathVariable int id){
+    //     return locationRepository.findById(id)
+    //     .map(Location -> {
+    //     if(locationDetails.getName() != null)
+    //         Location.setName(locationDetails.getName());
+    //     if(locationDetails.getLatitude() != null)
+    //         Location.setLatitude(locationDetails.getLatitude());
+    //     if(locationDetails.getLongitude() != null)
+    //         Location.setLongitude(locationDetails.getLongitude());
+    //     if(locationDetails.getMaxHrCap() != null)
+    //         Location.setMaxHrCap(locationDetails.getMaxHrCap());
+    //     if(locationDetails.getNo() != null)
+    //         Location.setNo(locationDetails.getNo());
+    //     if(locationDetails.getProcessingCost() != null)
+    //         Location.setProcessingCost(locationDetails.getProcessingCost());
+    //     if(locationDetails.getSla() != null)
+    //         Location.setSla(locationDetails.getSla());
+    //     return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(Location));
+    //     })
+    //     .orElseGet(() -> {
+    //         locationDetails.setId(id);
+    //         return ResponseEntity.status(HttpStatus.OK).body(locationRepository.save(locationDetails));
+    //     });
+    // }
+
+    
+    //Delete Location by ID
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<?> delete(@PathVariable int id){
+    //     if(!locationRepository.existsById(id))
+    //         return ResponseEntity.notFound().build();
+    //     locationRepository.deleteById(id);
+    //     return ResponseEntity.ok().build();
+    // }
+
+    
+    
+    
+    //Delete Location    
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
+    //     Optional<Location> delLocation = locationRepository.findById(id);
+    //     if(!delLocation.isPresent()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+
+    //     locationRepository.deleteById(id);
+    //     return ResponseEntity.ok().build();
+    // }
+
+
+    // Partial Data Update With Spring Data after checking ID
+
+        

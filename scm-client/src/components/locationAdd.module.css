@@ -1,0 +1,14 @@
+.textInputBox {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto auto auto auto;
+    margin-bottom: 50px;
+}
+
+.textInput {
+    margin: 0 10px !important;
+}
+
+.buttonInput {
+    margin: 0 10px !important;
+}

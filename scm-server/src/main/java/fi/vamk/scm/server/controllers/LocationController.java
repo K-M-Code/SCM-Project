@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,28 +23,33 @@ public class LocationController {
     
     @Autowired
     public LocationService locationService;
-    
+
+    @CrossOrigin
     @GetMapping("")
     public ResponseEntity<List<Location>> getAllLocations(){
         return locationService.getAllLocations();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Location> getLocationById(@PathVariable(value = "id") Integer id){
         return locationService.getLocationById(id);
     }
 
+    @CrossOrigin
     @PostMapping("")
     public ResponseEntity<Location> createNewLocation(@RequestBody Location location){
         return locationService.createNewLocation(location);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Location> updateLocationById(@PathVariable(value = "id") Integer id, @RequestBody Location location){
         return locationService.updateLocationById(location, id);
     }
 
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Location> deleteLocationById(@PathVariable(value = "id") Integer id){
         return locationService.deleteLocationById(id);

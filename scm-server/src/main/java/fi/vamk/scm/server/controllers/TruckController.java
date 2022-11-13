@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,27 +27,32 @@ public class TruckController {
     @Autowired
     public TruckService truckService;
     
+    @CrossOrigin
     @GetMapping("")
     public ResponseEntity<List<Truck>> getAllTrucks(){
         return truckService.getAllTrucks();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Truck> getTruckById(@PathVariable(value = "id") Integer id){
         return truckService.getTruckById(id);
     }
 
+    @CrossOrigin
     @PostMapping("")
     public ResponseEntity<Truck> createNewTruck(@RequestBody Truck truck){
         return truckService.createNewTruck(truck);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Truck> updateTruckById(@PathVariable(value = "id") Integer id, @RequestBody Truck truck){
         return truckService.updateTruckById(truck, id);
     }
 
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Truck> deleteTruckById(@PathVariable(value = "id") Integer id){
         return truckService.deleteTruckById(id);

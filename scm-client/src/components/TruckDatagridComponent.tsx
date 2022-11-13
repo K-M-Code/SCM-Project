@@ -40,7 +40,7 @@ const TruckDatagridComponent:FC=props=> {
         .catch(console.error)
         .then(truckResponse=>{
             setTruckArray(truckResponse);
-            console.log(JSON.stringify(truckResponse));
+            // console.log(JSON.stringify(truckResponse));
         })
     }
 

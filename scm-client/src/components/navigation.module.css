@@ -13,3 +13,20 @@
 header {
     background-color:rgba(1, 29, 153, 50) !important;
 }
+
+/* different color while in smaller screensize */
+
+@media only screen and (max-width: 768px) {
+    .navLink:link {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+    
+    .navLink:visited {
+        color: #000 !important;
+    }
+
+    .navLink:hover {
+        color: rgb(238, 107, 0) !important;
+    }
+}

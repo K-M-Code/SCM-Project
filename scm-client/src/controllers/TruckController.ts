@@ -1,10 +1,10 @@
 import { Truck } from '../type/Truck';
 import axios from 'axios';
 
-// const truckApi = '/api/truck'
+const truckApi = 'http://localhost:8080/api/truck'
 
 export async function getTruckData(): Promise<any> {
-    const truckResponse = await axios.get('/api/truck');
+    const truckResponse = await axios.get(truckApi);
     if(!truckResponse) {
         throw new Error(truckResponse);
     } else {
@@ -15,28 +15,29 @@ export async function getTruckData(): Promise<any> {
 // axios post request to add new truck
 export async function postTruckData(truck: Truck): Promise<any> {
     const truckResponse = await axios.post('/api/truck', truck);
-    if(!truckResponse) {
-        throw new Error(truckResponse);
-    } else {
+    // if(!truckResponse) {
+    //     throw new Error(truckResponse);
+    // } else {
     console.log(truckResponse.data);
     return truckResponse.data;
-    }
+    // }
 }
 
 // axios put request to update truck by id
 export async function putTruckData(truck: Truck): Promise<any> {
     const truckResponse = await axios.put(`/api/truck/${truck.id}`, truck);
-    if(!truckResponse) {
-        throw new Error(truckResponse);
-    } else {
+    // if(!truckResponse) {
+    //     throw new Error(truckResponse);
+    // } else {
     console.log(truckResponse.data);
     return truckResponse.data;
-    }
+    // }
 }
 
 // axios delete request to delete truck id
 export async function deleteTruckData(truck: Truck): Promise<any> {
-    const truckResponse = await axios.delete(`/api/truck/${truck.id}`);
+    const truckResponse = await axios.delete(`http://localhost:8080/api/truck/${truck.id}`);
+    console.log(truck.id);
     if(!truckResponse) {
         throw new Error(truckResponse);
     } else {

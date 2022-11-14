@@ -7,3 +7,9 @@ docker build --no-cache -t kmcode/scm-docker-dev .
 docker build -t kmcode/scm-server -f serverDockerFile .
 
 apt-get install net-tools
+
+ssh -i scm_tka_server root@80.69.175.2
+
+CREATE USER 'kmcode'@localhost IDENTIFIED BY 'kmcodePass';
+
+GRANT ALL PRIVILEGES ON 'kmcode_scm' TO 'kmcode'@localhost;

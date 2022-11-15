@@ -2,7 +2,7 @@ import { FC } from 'react';
 // import TruckDatagridComponent from '../components/TruckDatagridComponent';
 import styles from './container.module.css'; 
 import TruckAdd from '../components/TruckAdd';
-import TruckDatagridComponent from '../components/TruckData2';
+import TruckDatagridComponent from '../components/TruckDatagridComponent2';
 
 const TruckContainer:FC=props=> {
     return(

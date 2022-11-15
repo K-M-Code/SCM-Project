@@ -1,9 +1,10 @@
 import { Location } from '../type/Location';
 import axios from 'axios';
 
+const locationApi = 'http://localhost:8080/api/location'
 
 export async function getLocationData(): Promise<any> {
-    const locationResponse = await axios.get('/api/location');
+    const locationResponse = await axios.get(locationApi);
     if(!locationResponse) {
         throw new Error(locationResponse);
     } else {
@@ -11,9 +12,9 @@ export async function getLocationData(): Promise<any> {
     }
 }
 
-// axios post request
+// axios post request to add new location
 export async function postLocationData(location: Location): Promise<any> {
-    const locationResponse = await axios.post('/api/location', location);
+    const locationResponse = await axios.post(locationApi, location);
     if(!locationResponse) {
         throw new Error(locationResponse);
     } else {

@@ -9,13 +9,6 @@ import Button from '@mui/material/Button';
 
 
 
-
-// When TruckAdd adds a new truck, it should be added to the datagrid. The datagrid should be updated with the new truck.
-
-
-
-
-
 const TruckDatagridComponent:FC=props=> {
 
   const [truckArray, setTruckArray] = useState<Array<Truck>>([]);
@@ -27,7 +20,7 @@ const TruckDatagridComponent:FC=props=> {
     {
       field: 'id',
       headerName: 'ID',
-      // width: auto,
+      // width: 25,
       editable: true,
       headerAlign: 'center',
     },
@@ -78,12 +71,12 @@ const TruckDatagridComponent:FC=props=> {
       e.stopPropagation();
     };
 
+
     async function readTruckData() {
         await getTruckData()
         .catch(console.error)
         .then(truckResponse=>{
             setTruckArray(truckResponse);
-            // console.log(JSON.stringify(truckResponse));
         })
     }
 
@@ -102,11 +95,11 @@ const TruckDatagridComponent:FC=props=> {
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
-          disableSelectionOnClick
+          // disableSelectionOnClick
           experimentalFeatures={{ newEditingApi: true }}
         />
         </Box>
-        clickedRow: {clickedRow ? `${clickedRow?.id}` : null}
+        {/* clickedRow: {clickedRow ? `${clickedRow?.id}` : null} */}
       </div>
     )
 }

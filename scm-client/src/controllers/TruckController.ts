@@ -14,7 +14,7 @@ export async function getTruckData(): Promise<any> {
 
 // axios post request to add new truck
 export async function postTruckData(truck: Truck): Promise<any> {
-    const truckResponse = await axios.post('/api/truck', truck);
+    const truckResponse = await axios.post(truckApi, truck);
     if(!truckResponse) {
         throw new Error(truckResponse);
     } else {
@@ -36,7 +36,7 @@ export async function putTruckData(truck: Truck): Promise<any> {
 
 // axios delete request to delete truck id
 export async function deleteTruckData(truck: Truck): Promise<any> {
-    const truckResponse = await axios.delete(`http://localhost:8080/api/truck/${truck.id}`);
+    const truckResponse = await axios.delete(`/api/truck/${truck.id}`);
     console.log(truck.id);
     if(!truckResponse) {
         throw new Error(truckResponse);

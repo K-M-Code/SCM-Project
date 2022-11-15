@@ -14,7 +14,7 @@ const AboutComponent:FC=()=> {
         {/* <p>Key: {key}</p> */}
         <p>{myArray[0].name}</p>
         <p>{myArray[1].client}</p>
-        {/* <p>{myMap}</p> */}
+        <p>{myMap[1]}</p>
     </div>
   );
 }

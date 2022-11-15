@@ -11,32 +11,30 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
 type FormInputs = {
     licencePlate: string;
     name: string;
 };
 
-    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-        props,
-        ref,
-    ) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
-
-
-
-    
-
 const TruckAdd: FC = () => {
+
+
     const { register, handleSubmit } = useForm<FormInputs>();
 
     const [startLPValue, setLPValue] = useState("");
     const [startNValue, setNValue] = useState("");
 
-
-    
     const [success, setSuccess] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    
     const handleCloseSuccess = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
@@ -49,7 +47,6 @@ const TruckAdd: FC = () => {
         }
         setError(false);
     };
-    
 
     const submitHandler = (data: FormInputs) => {
         console.log(data);
@@ -59,7 +56,6 @@ const TruckAdd: FC = () => {
             "name": data.name
         };
 
-        // Catch error if post request fails
         postTruckData(truck).then((response) => {
             console.log(response);
             setLPValue("");
@@ -71,10 +67,7 @@ const TruckAdd: FC = () => {
             setError(true);
         });
 
-
     };
-
-
 
 
 return (
@@ -86,7 +79,6 @@ return (
 
 <FormControl variant="outlined">
     <Box className={styles.textInputBox}>
-
 
         <TextField 
         className={styles.textInput} 
@@ -116,8 +108,6 @@ return (
             Add Truck
         </Button>
 
-        
-
         <Snackbar
             open={success}
             autoHideDuration={6000}
@@ -134,13 +124,11 @@ return (
                 Error adding truck to database!
             </Alert>
         </Snackbar>
-        
 
     </Box>
     </FormControl>
 
         </form>
-
 
     </Box>
 </div>

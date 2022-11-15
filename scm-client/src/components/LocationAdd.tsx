@@ -42,6 +42,22 @@ const LocationAdd: FC = () => {
     const [startProcessingCostValue, setProcessingCostValue] = useState("");
     const [startSlaValue, setSlaValue] = useState("");
 
+    const [success, setSuccess] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    
+    const handleCloseSuccess = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSuccess(false);
+    };
+    const handleCloseError = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setError(false);
+    };
+
 
 
     const submitHandler = (data: FormInputs) => {
@@ -56,7 +72,8 @@ const LocationAdd: FC = () => {
             "processingCost": data.processingCost,
             "no": data.no
         };
-        postLocationData(location);
+        postLocationData(location).then((response) => {
+            console.log(response);
 
         setNoValue("");
         setNameValue("");
@@ -66,22 +83,13 @@ const LocationAdd: FC = () => {
         setProcessingCostValue("");
         setSlaValue("");
 
-        notificationOpen();
+        setSuccess(true);
+    })
+    .catch((error) => {
+        console.log(error);
+        setError(true);
+    });
 
-    };
-
-    const [open, setOpen] = React.useState(false);
-
-    const notificationOpen = () => {
-    setOpen(true);
-    };
-
-    const notificationClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-        return;
-    }
-
-    setOpen(false);
     };
 
 
@@ -176,13 +184,22 @@ return (
         </Button>
 
         
+
+
         <Snackbar
-            open={open}
+            open={success}
             autoHideDuration={6000}
-            onClose={notificationClose}
-        >            
-            <Alert onClose={notificationClose} severity="success" sx={{ width: '100%' }}>
-            Location Added Successfully
+            onClose={handleCloseSuccess}>
+            <Alert onClose={handleCloseSuccess} severity="success">
+                Location successfully added to database!
+            </Alert>
+        </Snackbar>
+        <Snackbar
+            open={error}
+            autoHideDuration={6000}
+            onClose={handleCloseError}>
+            <Alert onClose={handleCloseError} severity="error">
+                Error adding Location to database!
             </Alert>
         </Snackbar>
         

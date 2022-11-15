@@ -1,9 +1,51 @@
-/* 
-.datagrid{
-    margin: auto;
-    width: 25%;
+
+/* Responsive datagrid sizes */
+
+
+@media screen and (min-width: 1537px) {
+    .datagrid {
+        margin: auto;
+        max-width: 1536px;
+    }
 }
 
-.datagrid Box {
-    margin: auto;
-} */
+@media screen and (max-width: 1536px) {
+    .datagrid {
+        margin: auto;
+        max-width: 1280px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .datagrid {
+        margin: auto;
+        max-width: 1024px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .datagrid {
+        margin: auto;
+        max-width: 768px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .datagrid {
+        margin: auto;
+        max-width: 512px;
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .datagrid {
+        margin: auto;
+        max-width: 256px;
+    }
+}
+
+@media screen and (max-width: 256px) {
+    .datagrid {
+        max-width: 100%;
+    }
+}

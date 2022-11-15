@@ -80,11 +80,24 @@ const TruckDatagridComponent:FC=props=> {
         })
     }
 
+    // useEffect(() => {
+    //     readTruckData();
+    // }, [])
+
+
+    // On row data change, update the state of the grid to trigger a re-render of the grid with the new data and post the new data to the server
+
     useEffect(() => {
+        setTruckArray(truckArray);
         readTruckData();
-    }, [])
+    }, [truckArray])
 
-
+    // useEffect(() => {
+    //   if (clickedRow !== undefined) {
+    //     console.log("Truck Data has changed, updating state.");
+    //     readTruckData();
+    //   }
+    // }, [clickedRow]);
 
     return(
       <div className={styles.datagrid}>        

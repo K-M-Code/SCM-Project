@@ -9,7 +9,7 @@ const AboutComponent:FC=()=> {
     // const key = myMap.keys(1);
   return (
     <div className="about">
-      <h1>About</h1>
+      <h1></h1>
       <p>This is the about page.</p>
         {/* <p>Key: {key}</p> */}
         <p>{myArray[0].name}</p>

@@ -1,3 +1,4 @@
+#### Stage 1: Build the Java application
 FROM eclipse-temurin:17-jdk-jammy as builder
 WORKDIR /server
 COPY .mvn .mvn
@@ -5,8 +6,7 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline
 COPY ./src src
 RUN ./mvnw clean install
- 
- 
+
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /server
 EXPOSE 8080

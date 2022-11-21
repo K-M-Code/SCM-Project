@@ -1,4 +1,4 @@
-#### Stage 1: Build the react application
+#### Stage 1: Build the React application
 FROM node:current-alpine3.16 as build
 
 # Configure the main working directory inside the docker image. 

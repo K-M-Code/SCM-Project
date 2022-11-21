@@ -1,5 +1,5 @@
 import { Truck } from '../type/Truck';
-import http from "../http-common";
+import http from "./http-common";
 
 export async function getTruckData(): Promise<any> {
     const truckResponse = await http.get('/truck');

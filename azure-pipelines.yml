@@ -43,11 +43,20 @@ stages:
         tags: |
           $(tag)          
 
-- task: DockerCompose@0
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerComposeFile: '**/docker-compose.yml'
-    qualifyImageNames: false
-    action: 'Build services'
-    includeSourceTags: true
-    includeLatestTag: true
+
+- stage: Build_Final_All
+  displayName: Build All Image
+  jobs:
+  - job: Build_All
+    displayName: Build SCM Service
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerComposeFile: '**/docker-compose.yml'
+        qualifyImageNames: false
+        action: 'Build services'
+        includeSourceTags: true
+        includeLatestTag: true

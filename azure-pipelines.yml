@@ -12,51 +12,51 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build_Server
-  displayName: Build Server Image
-  jobs:
-  - job: Build_Server
-    displayName: Build SCM Server
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build scm-server image
-      inputs:
-        command: build
-        dockerfile: '**/scm-server/serverDockerFile'
-        tags: |
-          $(tag)
-- stage: Build_Client
-  displayName: Build Client Image
-  jobs:
-  - job: Build_Client
-    displayName: Build SCM Client
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build scm-client image
-      inputs:
-        command: build
-        dockerfile: '**/scm-client/clientDockerFile'
-        tags: |
-          $(tag)          
-
-
-# - stage: Build_Final_All
-#   displayName: Build All Image
+# - stage: Build_Server
+#   displayName: Build Server Image
 #   jobs:
-#   - job: Build_All
-#     displayName: Build SCM Service
+#   - job: Build_Server
+#     displayName: Build SCM Server
 #     pool:
 #       vmImage: ubuntu-latest
 #     steps:
-#     - task: DockerCompose@0
+#     - task: Docker@2
+#       displayName: Build scm-server image
 #       inputs:
-#         containerregistrytype: 'Container Registry'
-#         dockerComposeFile: '**/docker-compose.yml'
-#         qualifyImageNames: false
-#         action: 'Build services'
-#         includeSourceTags: true
-#         includeLatestTag: true
+#         command: build
+#         dockerfile: '**/scm-server/serverDockerFile'
+#         tags: |
+#           $(tag)
+# - stage: Build_Client
+#   displayName: Build Client Image
+#   jobs:
+#   - job: Build_Client
+#     displayName: Build SCM Client
+#     pool:
+#       vmImage: ubuntu-latest
+#     steps:
+#     - task: Docker@2
+#       displayName: Build scm-client image
+#       inputs:
+#         command: build
+#         dockerfile: '**/scm-client/clientDockerFile'
+#         tags: |
+#           $(tag)          
+
+
+- stage: Build_Final_All
+  displayName: Build All Image
+  jobs:
+  - job: Build_All
+    displayName: Build SCM Service
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerComposeFile: '**/docker-compose.yml'
+        qualifyImageNames: false
+        action: 'Build services'
+        includeSourceTags: true
+        includeLatestTag: true

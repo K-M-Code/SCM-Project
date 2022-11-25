@@ -12,10 +12,10 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build Server
+- stage: Build_Server
   displayName: Build Server Image
   jobs:
-  - job: Build Server
+  - job: Build_Server
     displayName: Build Server
     pool:
       vmImage: ubuntu-latest
@@ -27,10 +27,10 @@ stages:
         dockerfile: '**/scm-server/serverDockerFile'
         tags: |
           $(tag)
-- stage: Build Client
+- stage: Build_Client
   displayName: Build Client Image
   jobs:
-  - job: Build Client
+  - job: Build_Client
     displayName: Build Client
     pool:
       vmImage: ubuntu-latest

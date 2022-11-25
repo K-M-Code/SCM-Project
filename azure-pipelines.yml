@@ -42,3 +42,12 @@ stages:
         dockerfile: '**/scm-client/clientDockerFile'
         tags: |
           $(tag)          
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '**/docker-compose.yml'
+    qualifyImageNames: false
+    action: 'Build services'
+    includeSourceTags: true
+    includeLatestTag: true

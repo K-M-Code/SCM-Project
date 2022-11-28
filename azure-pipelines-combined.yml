@@ -84,12 +84,12 @@ stages:
         failOnEmptySource: true
 
 
-- stage: Copy_to_Timos_Server
-  displayName: Copy Build to Timos Server
-  jobs:
-  - job: Copy_to_Timos_Server
-    displayName: Copy Build to Timos Server
-    steps:
+# - stage: Copy_to_Timos_Server
+#   displayName: Copy Build to Timos Server
+#   jobs:
+#   - job: Copy_to_Timos_Server
+#     displayName: Copy Build to Timos Server
+#     steps:
     # - task: CopyFilesOverSSH@0
     #   inputs:
     #     sshEndpoint: 'timoserver'

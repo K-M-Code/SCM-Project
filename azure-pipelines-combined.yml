@@ -16,6 +16,7 @@ stages:
   jobs:
   - job: Build_Server
     displayName: Build SCM Server
+
     steps:
     - task: Maven@3
       inputs:
@@ -27,12 +28,14 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
+
     - task: CopyFiles@2
       displayName: 'Copy Jar Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/scm-server/target/*.?(war|jar)'
         TargetFolder: $(Build.ArtifactStagingDirectory)
+
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)
@@ -46,6 +49,7 @@ stages:
         Contents: '**/scm-server/target/*.?(war|jar)'
         targetFolder: /home/kmcode/scm-km/test/
         failOnEmptySource: true
+
 
 - stage: Build_Clicent
   displayName: Build Client
@@ -64,23 +68,26 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+
     - task: CopyFiles@2
       displayName: 'Copy Build Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/scm-client/build/**'
         TargetFolder: $(Build.ArtifactStagingDirectory)
+
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)
         artifactName: ReactBuild
+
     - task: CopyFilesOverSSH@0
       displayName: 'Securely copy files to the remote machine'
       inputs:
         sshEndpoint: timoserver
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/scm-client/build/**'
-        targetFolder: /var/www/html/kmcode/
+        targetFolder: /home/kmcode/scm-km/test/
         failOnEmptySource: true
 
 

@@ -9,7 +9,7 @@ export function getMapValue() {
 export function saveKeyValue() {
 
     let array = [];
-    const item={name:"Kunal"};
+    const item={name:"Blah"};
     const item2={client:"Blah"};
     array.push(item);
     array.push(item2);
@@ -20,9 +20,9 @@ export function saveMapValue() {
 
     let array = [];
     let map = new Map();
-    map.set('Kunal', 'Student');
+    map.set('Blah', 'Student');
     map.set('Timo', 'Teacher');
-    const item={name:"Kunal"};
+    const item={name:"Blah"};
     const item2={client:"React"};
     array.push(item);
     array.push(item2);

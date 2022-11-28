@@ -1,7 +1,7 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Kunal Menon Pipeline for Build and Deploy to Timos Server
+# This 1st builds the JAR file for the server 
+# Then 2nd builds the build files for the client
+# Final step copies the JAR file and BUILD folder to the server over SSH
 
 trigger:
 - master
@@ -27,6 +27,7 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
+
 - stage: Build_Clicent
   displayName: Build Client
   jobs:
@@ -55,7 +56,10 @@ stages:
       displayName: 'Securely copy files to the remote machine'
       inputs:
         sshEndpoint: timoserver
+        contents: |
+          scm-server/target/*.jar
+          scm-client/build/**
         sourceFolder: '$(Build.SourcesDirectory)'
-        targetFolder: /home/kmcode/scm-km/azure
+        targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true
         failOnEmptySource: true

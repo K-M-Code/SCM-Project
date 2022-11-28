@@ -112,4 +112,6 @@ stages:
         sshEndpoint: timoserver
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         targetFolder: /home/kmcode/scm-km/test2/
-        contents: '**/**'
+        contents: |
+          **/scm-server/target/*.jar
+          **/scm-client/build/**

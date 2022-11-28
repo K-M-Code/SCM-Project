@@ -6,37 +6,55 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: Build_Server
+  displayName: Build Server
+  jobs:
+  - job: Build_Server
+    displayName: Build SCM Server
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'scm-server/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.9'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'package'
+- stage: Build_Clicent
+  displayName: Build Client
+  jobs:
+  - job: Build_Client
+    displayName: Build SCM Client
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Install Node.js'
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'scm-server/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.9'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    - script: |
+        cd scm-client
+        npm install
+        npm run build
+      displayName: 'npm install and build'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    cd scm-client
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
-- task: CopyFilesOverSSH@0
-  displayName: 'Securely copy files to the remote machine'
-  inputs:
-    sshEndpoint: timoserver
-    sourceFolder: '$(Build.SourcesDirectory)'
-    targetFolder: /home/kmcode/scm-km/azure
-    cleanTargetFolder: true
-    failOnEmptySource: true
+- stage: Copy_to_Timos_Server
+  displayName: Copy Build to Timos Server
+  jobs:
+  - job: Copy_to_Timos_Server
+    displayName: Copy Build to Timos Server
+    steps:
+    - task: CopyFilesOverSSH@0
+      displayName: 'Securely copy files to the remote machine'
+      inputs:
+        sshEndpoint: timoserver
+        sourceFolder: '$(Build.SourcesDirectory)'
+        targetFolder: /home/kmcode/scm-km/azure
+        cleanTargetFolder: true
+        failOnEmptySource: true

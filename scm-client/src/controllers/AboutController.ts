@@ -10,7 +10,7 @@ export function saveKeyValue() {
 
     let array = [];
     const item={name:"Kunal"};
-    const item2={client:"React"};
+    const item2={client:"Blah"};
     array.push(item);
     array.push(item2);
     return localStorage.setItem('array', JSON.stringify(array));

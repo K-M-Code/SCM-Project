@@ -31,3 +31,12 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: CopyFilesOverSSH@0
+  displayName: 'Securely copy files to the remote machine'
+  inputs:
+    sshEndpoint: timoserver
+    sourceFolder: '$(Build.SourcesDirectory)'
+    targetFolder: /home/kmcode/scm-km/azure
+    cleanTargetFolder: true
+    failOnEmptySource: true

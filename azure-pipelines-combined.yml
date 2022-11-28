@@ -79,7 +79,7 @@ stages:
         # contents: |
         #   SpringBootBuild/**
         #   ReactBuild/**
-        sourceFolder: '$(Build.ArtifactStagingDirectory)'
+        sourceFolder: $(Build.ArtifactStagingDirectory)
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true
         failOnEmptySource: true

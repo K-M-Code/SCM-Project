@@ -27,6 +27,17 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
+    - task: CopyFilesOverSSH@0
+      displayName: 'Securely copy files to the remote machine'
+      inputs:
+        sshEndpoint: timoserver
+        contents: |
+          scm-server/target/*.jar
+          scm-client/build/**
+        sourceFolder: '$(Pipeline.Workspace)'
+        targetFolder: /home/kmcode/scm-km/test/
+        cleanTargetFolder: true
+        failOnEmptySource: true
 
 - stage: Build_Clicent
   displayName: Build Client
@@ -45,6 +56,17 @@ stages:
         npm install
         npm run build
       displayName: 'npm install and build'
+    - task: CopyFilesOverSSH@0
+      displayName: 'Securely copy files to the remote machine'
+      inputs:
+        sshEndpoint: timoserver
+        contents: |
+          scm-server/target/*.jar
+          scm-client/build/**
+        sourceFolder: '$(Pipeline.Workspace)'
+        targetFolder: /home/kmcode/scm-km/test/
+        cleanTargetFolder: true
+        failOnEmptySource: true
 
 - stage: Copy_to_Timos_Server
   displayName: Copy Build to Timos Server

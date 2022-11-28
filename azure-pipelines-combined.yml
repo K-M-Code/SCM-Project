@@ -31,7 +31,7 @@ stages:
       inputs:
         buildType: 'current'
         downloadType: 'single'
-        artifactName: 'drop'
+        artifactName: 'server-0.0.1-SNAPSHOT.jar'
         downloadPath: '$(System.ArtifactsDirectory)'
     - task: CopyFilesOverSSH@0
       displayName: 'Securely copy files to the remote machine'

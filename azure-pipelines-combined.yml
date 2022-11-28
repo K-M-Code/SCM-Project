@@ -106,12 +106,12 @@ stages:
     #     contents: '**'
     #     readyTimeout: '20000'
     #     failOnEmptySource: true
-    - task: CopyFilesOverSSH@0
-      displayName: 'Securely copy files to the remote machine'
-      inputs:
-        sshEndpoint: timoserver
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        targetFolder: /home/kmcode/scm-km/test2/
-        contents: |
-          **/scm-server/target/*.jar
-          **/scm-client/build/**
+    # - task: CopyFilesOverSSH@0
+    #   displayName: 'Securely copy files to the remote machine'
+    #   inputs:
+    #     sshEndpoint: timoserver
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     targetFolder: /home/kmcode/scm-km/test2/
+    #     contents: |
+    #       **/scm-server/target/*.jar
+    #       **/scm-client/build/**

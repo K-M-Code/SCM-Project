@@ -10,7 +10,7 @@ const AboutComponent:FC=()=> {
   return (
     <div className="about">
       <h1></h1>
-      <p>This is the about page.</p>
+      <p>This is the changed about page.</p>
         {/* <p>Key: {key}</p> */}
         <p>{myArray[0].name}</p>
         <p>{myArray[1].client}</p>

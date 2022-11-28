@@ -80,20 +80,19 @@ stages:
     #     contents: '**'
     #     readyTimeout: '20000'
     #     failOnEmptySource: true
-    - task: CopyFilesOverSSH@0
-      inputs:
-        sshEndpoint: 'timoserver'
-        sourceFolder: '$(System.DefaultWorkingDirectory)'
-        targetFolder: /home/kmcode/scm-km/test/
-        contents: '**'
-        readyTimeout: '20000'
-        failOnEmptySource: true
+    # - task: CopyFilesOverSSH@0
+    #   inputs:
+    #     sshEndpoint: 'timoserver'
+    #     sourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     targetFolder: /home/kmcode/scm-km/test/
+    #     contents: '**'
+    #     readyTimeout: '20000'
+    #     failOnEmptySource: true
     - task: CopyFilesOverSSH@0
       displayName: 'Securely copy files to the remote machine'
       inputs:
         sshEndpoint: timoserver
-        contents: |
-          **\*
+        contents: '**/*'
         sourceFolder: '$(Build.ArtifactStagingDirectory)'
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true

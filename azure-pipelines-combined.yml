@@ -27,20 +27,24 @@ stages:
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
-    - task: DownloadBuildArtifacts@0
+    - task: CopyFiles@2
+      displayName: 'Copy Files to artifact staging directory'
       inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'server-0.0.1-SNAPSHOT.jar'
-        downloadPath: $(Build.ArtifactStagingDirectory)/scm-server/target
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: SpringBootBuild
     - task: CopyFilesOverSSH@0
       displayName: 'Securely copy files to the remote machine'
       inputs:
         sshEndpoint: timoserver
-        contents: |
-          scm-server/target/*.jar
-          scm-client/build/**
-        sourceFolder: '$(Agent.BuildDirectory)'
+        # contents: |
+        #   scm-server/target/*.jar
+        #   scm-client/build/**
+        sourceFolder: '$(Build.ArtifactStagingDirectory)'
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true
         failOnEmptySource: true

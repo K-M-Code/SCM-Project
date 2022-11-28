@@ -51,7 +51,7 @@ stages:
         failOnEmptySource: true
 
 
-- stage: Build_Clicent
+- stage: Build_Client
   displayName: Build Client
   jobs:
   - job: Build_Client

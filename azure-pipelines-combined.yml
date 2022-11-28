@@ -80,14 +80,16 @@ stages:
         sshEndpoint: timoserver
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/scm-client/build/**'
+        targetFolder: /home/kmcode/scm-km/test/
+        failOnEmptySource: true
 
 
-# - stage: Copy_to_Timos_Server
-#   displayName: Copy Build to Timos Server
-#   jobs:
-#   - job: Copy_to_Timos_Server
-#     displayName: Copy Build to Timos Server
-#     steps:
+- stage: Copy_to_Timos_Server
+  displayName: Copy Build to Timos Server
+  jobs:
+  - job: Copy_to_Timos_Server
+    displayName: Copy Build to Timos Server
+    steps:
     # - task: CopyFilesOverSSH@0
     #   inputs:
     #     sshEndpoint: 'timoserver'
@@ -104,12 +106,10 @@ stages:
     #     contents: '**'
     #     readyTimeout: '20000'
     #     failOnEmptySource: true
-    # - task: CopyFilesOverSSH@0
-    #   displayName: 'Securely copy files to the remote machine'
-    #   inputs:
-    #     sshEndpoint: timoserver
-    #     contents: **/*.jar
-    #     sourceFolder: '$(Build.ArtifactStagingDirectory)'
-    #     targetFolder: /home/kmcode/scm-km/test/
-    #     cleanTargetFolder: true
-    #     failOnEmptySource: true
+    - task: CopyFilesOverSSH@0
+      displayName: 'Securely copy files to the remote machine'
+      inputs:
+        sshEndpoint: timoserver
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        targetFolder: /home/kmcode/scm-km/test2/
+        contents: '**/**'

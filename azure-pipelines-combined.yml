@@ -32,7 +32,7 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'server-0.0.1-SNAPSHOT.jar'
-        downloadPath: $(System.ArtifactStagingDirectory)/scm-server/target
+        downloadPath: $(Build.ArtifactStagingDirectory)/scm-server/target
     - task: CopyFilesOverSSH@0
       displayName: 'Securely copy files to the remote machine'
       inputs:

@@ -34,7 +34,7 @@ stages:
         contents: |
           scm-server/target/*.jar
           scm-client/build/**
-        sourceFolder: '$(Pipeline.Workspace)'
+        sourceFolder: '$(Build)'
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true
         failOnEmptySource: true

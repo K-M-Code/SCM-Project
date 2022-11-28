@@ -82,3 +82,11 @@ stages:
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true
         failOnEmptySource: true
+
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'timoserver'
+        sourceFolder: '$(Pipeline.Workspace)'
+        contents: '**'
+        readyTimeout: '20000'
+        failOnEmptySource: true

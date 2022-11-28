@@ -80,7 +80,7 @@ stages:
         sshEndpoint: timoserver
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**/scm-client/build/**'
-        targetFolder: /home/kmcode/scm-km/test/
+        targetFolder: /var/www/html/kmcode/
         failOnEmptySource: true
 
 

@@ -72,14 +72,14 @@ stages:
   - job: Copy_to_Timos_Server
     displayName: Copy Build to Timos Server
     steps:
-    - task: CopyFilesOverSSH@0
-      inputs:
-        sshEndpoint: 'timoserver'
-        sourceFolder: '$(Pipeline.Workspace)'
-        targetFolder: /home/kmcode/scm-km/test/
-        contents: '**'
-        readyTimeout: '20000'
-        failOnEmptySource: true
+    # - task: CopyFilesOverSSH@0
+    #   inputs:
+    #     sshEndpoint: 'timoserver'
+    #     sourceFolder: '$(Pipeline.Workspace)'
+    #     targetFolder: /home/kmcode/scm-km/test/
+    #     contents: '**'
+    #     readyTimeout: '20000'
+    #     failOnEmptySource: true
     - task: CopyFilesOverSSH@0
       inputs:
         sshEndpoint: 'timoserver'

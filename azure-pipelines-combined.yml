@@ -28,10 +28,10 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
     - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
+      displayName: 'Copy Jar Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/*.?(war|jar)'
+        Contents: '**/scm-server/target/*.?(war|jar)'
         TargetFolder: $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
       inputs:
@@ -56,10 +56,10 @@ stages:
         npm run build
       displayName: 'npm install and build'
     - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
+      displayName: 'Copy Build Files to artifact staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/build/**'
+        Contents: '**/scm-client/build/**'
         TargetFolder: $(Build.ArtifactStagingDirectory)
     - task: PublishBuildArtifacts@1
       inputs:
@@ -76,9 +76,9 @@ stages:
       displayName: 'Securely copy files to the remote machine'
       inputs:
         sshEndpoint: timoserver
-        contents: |
-          SpringBootBuild/**
-          ReactBuild/**
+        # contents: |
+        #   SpringBootBuild/**
+        #   ReactBuild/**
         sourceFolder: '$(Build.ArtifactStagingDirectory)'
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true

@@ -77,8 +77,8 @@ stages:
       inputs:
         sshEndpoint: timoserver
         contents: |
-          scm-server/target/*.jar
-          scm-client/build/**
+          SpringBootBuild
+          ReactBuild
         sourceFolder: '$(Build.ArtifactStagingDirectory)'
         targetFolder: /home/kmcode/scm-km/test/
         cleanTargetFolder: true

@@ -6,14 +6,16 @@
 trigger:
 - master
 
+pool:
+  vmImage: ubuntu-latest
+
+
 stages:
 - stage: Build_Server
   displayName: Build Server
   jobs:
   - job: Build_Server
     displayName: Build SCM Server
-    pool:
-      vmImage: ubuntu-latest
     steps:
     - task: Maven@3
       inputs:
@@ -30,8 +32,7 @@ stages:
   jobs:
   - job: Build_Client
     displayName: Build SCM Client
-    pool:
-      vmImage: ubuntu-latest
+
     steps:
     - task: NodeTool@0
       inputs:

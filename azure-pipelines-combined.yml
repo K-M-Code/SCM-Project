@@ -3,8 +3,8 @@
 # Then 2nd builds the build files for the client
 # Final step copies the JAR file and BUILD folder to the server over SSH
 
-trigger:
-- master
+# trigger:
+# - master
 
 pool:
   vmImage: ubuntu-latest

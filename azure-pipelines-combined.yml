@@ -6,19 +6,12 @@
 # trigger:
 # - master
 
-name: $(Date:MM)
-
 variables:
-    aplhabet: a
-    
-    mydateMacro1: $(Get-Date -Format MM)
     global_buildDate: $[format('{0:MM}', pipeline.startTime)]
 
 steps:
-  - script: echo 'pw-$(Build.BuildNumber)$(aplhabet)'
-  - script: echo $(mydateMacro1)
   - script: echo $(global_buildDate)
-  - script: mkdir 'pw-$(Build.BuildNumber)$(aplhabet)'
+  - script: mkdir 'pw-$(global_buildDate)-build'
   - script: ls
 
 # pool:

@@ -6,12 +6,10 @@
 # trigger:
 # - master
 
-jobs:
-- job:
-  variables:
-    a: $(Date:MMddyy)
-  steps:
-  - bash: echo $(a)
+name: $(Date:yyyyMMdd)
+
+steps:
+  - script: echo '$(Build.BuildNumber)'
 
 # pool:
 #   vmImage: ubuntu-latest

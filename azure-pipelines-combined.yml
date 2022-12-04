@@ -12,7 +12,7 @@ variables:
     aplhabet: a
     
     mydateMacro1: $(Get-Date -Format MM)
-    global_buildDate: $[format('{0:MM}', pipeline.startTime)]<br>
+    global_buildDate: $[format('{0:MM}', pipeline.startTime)]
 
 steps:
   - script: echo 'pw-$(Build.BuildNumber)$(aplhabet)'

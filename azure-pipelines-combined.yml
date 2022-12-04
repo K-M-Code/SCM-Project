@@ -8,8 +8,11 @@
 
 name: $(Date:MM)
 
+variables:
+    aplhabet: a
+
 steps:
-  - script: echo 'pw-$(Build.BuildNumber)$(Rev:.r)'
+  - script: echo 'pw-$(Build.BuildNumber)$[counter(variables['aplhabet'], 0)]'
 
 # pool:
 #   vmImage: ubuntu-latest

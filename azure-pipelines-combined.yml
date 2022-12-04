@@ -9,7 +9,7 @@
 jobs:
 - job:
   variables:
-    a: $[counter(format('{MM}', pipeline.startTime))]
+    a: $(Month)
   steps:
   - bash: echo $(a)
 

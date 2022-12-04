@@ -9,7 +9,7 @@
 name: $(Date:MM)
 
 steps:
-  - script: echo '$(Build.BuildNumber)'
+  - script: echo 'pw-$(Build.BuildNumber)$(Rev:.r)'
 
 # pool:
 #   vmImage: ubuntu-latest

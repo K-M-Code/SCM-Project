@@ -36,12 +36,22 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         goals: 'package'
 
-    - task: CopyFiles@2
-      displayName: 'Copy Jar Files to artifact staging directory'
+    - task: ArchiveFiles@2
       inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-server/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+        rootFolderOrFile: '**/scm-server/target/*.?(war|jar)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+        verbose: true
+
+
+    # - task: CopyFiles@2
+    #   displayName: 'Copy Jar Files to artifact staging directory'
+    #   inputs:
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     Contents: '**/scm-server/target/*.?(war|jar)'
+    #     TargetFolder: $(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:

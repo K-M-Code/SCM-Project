@@ -3,60 +3,60 @@
 # Then 2nd builds the build files for the client
 # Final step copies the JAR file and BUILD folder to the server over SSH
 
-# trigger:
-# - master
+trigger:
+- master
 
 variables:
     global_buildDate: $[format('{0:MM}', pipeline.startTime)]
 
-steps:
-  - script: echo $(global_buildDate)
-  - script: mkdir 'pw-$(global_buildDate)-build'
-  - script: ls
+# steps:
+#   - script: echo $(global_buildDate)
+#   - script: mkdir 'pw-$(global_buildDate)-build'
+#   - script: ls
 
-# pool:
-#   vmImage: ubuntu-latest
+pool:
+  vmImage: ubuntu-latest
 
-# stages:
-# - stage: Build_Server
-#   displayName: Build Server
-#   jobs:
-#   - job: Build_Server      
-#     displayName: Build SCM Server
+stages:
+- stage: Build_Server
+  displayName: Build Server
+  jobs:
+  - job: Build_Server      
+    displayName: Build SCM Server
 
-    # steps:
-    # - bash: $(a)
-    # - task: Maven@3
-    #   inputs:
-    #     mavenPomFile: 'scm-server/pom.xml'
-    #     mavenOptions: '-Xmx3072m'
-    #     javaHomeOption: 'JDKVersion'
-    #     jdkVersionOption: '1.9'
-    #     jdkArchitectureOption: 'x64'
-    #     publishJUnitResults: true
-    #     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    #     goals: 'package'
+    steps:
+    - bash: $(a)
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'scm-server/pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.9'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'package'
 
-    # - task: CopyFiles@2
-    #   displayName: 'Copy Jar Files to artifact staging directory'
-    #   inputs:
-    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    #     Contents: '**/scm-server/target/*.?(war|jar)'
-    #     TargetFolder: $(Build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      displayName: 'Copy Jar Files to artifact staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/scm-server/target/*.?(war|jar)'
+        TargetFolder: $(Build.ArtifactStagingDirectory)
 
-    # - task: PublishBuildArtifacts@1
-    #   inputs:
-    #     pathToPublish: $(Build.ArtifactStagingDirectory)
-    #     artifactName: SpringBootBuild
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: pw-$(global_buildDate)-build
         
-    # - task: CopyFilesOverSSH@0
-    #   displayName: 'Securely copy files to the remote machine'
-    #   inputs:
-    #     sshEndpoint: timoserver
-    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    #     Contents: '**/scm-server/target/*.?(war|jar)'
-    #     targetFolder: /home/kmcode/scm-km/test/
-    #     failOnEmptySource: true
+    - task: CopyFilesOverSSH@0
+      displayName: 'Securely copy files to the remote machine'
+      inputs:
+        sshEndpoint: timoserver
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**/scm-server/target/*.?(war|jar)'
+        targetFolder: /home/kmcode/scm-km/test/
+        failOnEmptySource: true
 
 
 # - stage: Build_Client

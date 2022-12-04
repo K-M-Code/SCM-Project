@@ -9,14 +9,15 @@
 pool:
   vmImage: ubuntu-latest
 
-  variables:
-    a: $[counter(format('{0:yyyyMMdd}', pipeline.startTime), 100)]
-
 stages:
 - stage: Build_Server
   displayName: Build Server
   jobs:
   - job: Build_Server
+
+    variables:
+      a: $[counter(format('{0:yyyyMMdd}', pipeline.startTime), 100)]
+      
     displayName: Build SCM Server
 
     steps:

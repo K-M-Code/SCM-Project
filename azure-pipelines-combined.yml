@@ -12,7 +12,9 @@ variables:
     aplhabet: a
 
 steps:
-  - script: echo 'pw-$(Build.BuildNumber)$[counter(variables['aplhabet'], 0)]'
+  - script: echo 'pw-$(Build.BuildNumber)$(aplhabet)'
+  - script: mkdir 'pw-$(Build.BuildNumber)$(aplhabet)'
+  - script: ls
 
 # pool:
 #   vmImage: ubuntu-latest

@@ -38,7 +38,7 @@ stages:
 
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: 'scm-client/build/'
+        rootFolderOrFile: 'scm-client/build/*'
         includeRootFolder: true
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/pw-$(global_buildDate)-build.zip'

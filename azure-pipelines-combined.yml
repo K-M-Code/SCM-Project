@@ -25,7 +25,6 @@ stages:
     displayName: Build SCM Server
 
     steps:
-    - bash: $(a)
     - task: Maven@3
       inputs:
         mavenPomFile: 'scm-server/pom.xml'

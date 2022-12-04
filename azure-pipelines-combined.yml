@@ -38,7 +38,7 @@ stages:
 
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '**/scm-server/target/*'
+        rootFolderOrFile: '**'
         includeRootFolder: true
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
@@ -58,14 +58,14 @@ stages:
         pathToPublish: $(Build.ArtifactStagingDirectory)
         artifactName: pw-$(global_buildDate)-build
         
-    - task: CopyFilesOverSSH@0
-      displayName: 'Securely copy files to the remote machine'
-      inputs:
-        sshEndpoint: timoserver
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-server/target/*.?(war|jar)'
-        targetFolder: /home/kmcode/scm-km/test/
-        failOnEmptySource: true
+    # - task: CopyFilesOverSSH@0
+    #   displayName: 'Securely copy files to the remote machine'
+    #   inputs:
+    #     sshEndpoint: timoserver
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     Contents: '**/scm-server/target/*.?(war|jar)'
+    #     targetFolder: /home/kmcode/scm-km/test/
+    #     failOnEmptySource: true
 
 
 # - stage: Build_Client

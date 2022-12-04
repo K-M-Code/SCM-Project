@@ -9,7 +9,7 @@
 jobs:
 - job:
   variables:
-    a: $(Month)
+    a: $(Date:MM)
   steps:
   - bash: echo $(a)
 

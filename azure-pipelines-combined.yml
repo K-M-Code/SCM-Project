@@ -10,9 +10,14 @@ name: $(Date:MM)
 
 variables:
     aplhabet: a
+    
+    mydateMacro1: $(Get-Date -Format MM)
+    mydateMacro2: $(Get-Date -Format yyyyMMddhhmmss)
 
 steps:
   - script: echo 'pw-$(Build.BuildNumber)$(aplhabet)'
+            echo mydateMacro1
+            echo mydataMacro2
   - script: mkdir 'pw-$(Build.BuildNumber)$(aplhabet)'
   - script: ls
 

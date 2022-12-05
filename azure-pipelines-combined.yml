@@ -7,11 +7,12 @@ trigger:
 - master
 
 variables:
-    global_buildDate: $[format('{0:MM}', pipeline.startTime)]
+    buildMonth: $[format('{0:MM}', pipeline.startTime)]
+    buildDay: $[format('{0:dd}', pipeline.startTime)]
 
 # steps:
-#   - script: echo $(global_buildDate)
-#   - script: mkdir 'pw-$(global_buildDate)-build'
+#   - script: echo $(buildMonth)
+#   - script: mkdir 'pw-$(buildMonth)-build'
 #   - script: ls
 
 pool:
@@ -41,14 +42,14 @@ stages:
         rootFolderOrFile: 'scm-client/build/'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/pw-$(global_buildDate)-build.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/pw-$(buildMonth)-$(buildDay).zip'
         replaceExistingArchive: true
         verbose: true
 
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)
-        artifactName: YarnBuild_$(global_buildDate)
+        artifactName: YarnBuild_$(buildMonth)_$(buildDay)
 
 # - stage: Build_Server
 #   displayName: Build Server

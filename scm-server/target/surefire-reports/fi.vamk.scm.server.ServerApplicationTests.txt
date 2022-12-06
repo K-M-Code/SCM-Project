@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fi.vamk.scm.server.ServerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.66 s - in fi.vamk.scm.server.ServerApplicationTests

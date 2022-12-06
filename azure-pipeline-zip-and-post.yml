@@ -30,9 +30,9 @@ stages:
       displayName: 'Install Node.js'
 
     - script: |
-        yarn install
-        yarn run build
-      displayName: 'yarn install and build'
+        npm install
+        npm run build
+      displayName: 'npm install and build'
 
     - task: ArchiveFiles@2
       inputs:

@@ -164,3 +164,9 @@ stages:
     #     contents: |
     #       **/scm-server/target/*.jar
     #       **/scm-client/build/**
+
+
+
+    # Azure Pipeline to build a react app and zip to artifact and copy to web dav folder
+
+    

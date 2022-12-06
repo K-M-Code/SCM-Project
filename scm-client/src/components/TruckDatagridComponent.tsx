@@ -8,12 +8,8 @@ import styles from './datagrid.module.css';
 import Button from '@mui/material/Button';
 
 
-interface Props {
-    trucks: Array<Truck>;
-}
 
-
-const TruckDatagridComponent:FC<Props>=props=> {
+const TruckDatagridComponent:FC=props=> {
 
   const [truckArray, setTruckArray] = useState<Array<Truck>>([]);
 
@@ -84,17 +80,9 @@ const TruckDatagridComponent:FC<Props>=props=> {
         })
     }
 
-    // useEffect(() => {
-    //     readTruckData();
-    // }, [])
-
-
-    // On row data change, update the state of the grid to trigger a re-render of the grid with the new data and post the new data to the server
-
     useEffect(() => {
-        // setTruckArray(truckArray);
         readTruckData();
-    },[])
+    }, [])
 
 
 

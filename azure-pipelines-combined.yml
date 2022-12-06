@@ -6,51 +6,19 @@
 trigger:
 - master
 
+variables:
+    buildMonth: $[format('{0:MM}', pipeline.startTime)]
+    buildDay: $[format('{0:dd}', pipeline.startTime)]
+
+# steps:
+#   - script: echo $(buildMonth)
+#   - script: mkdir 'pw-$(buildMonth)-build'
+#   - script: ls
+
 pool:
   vmImage: ubuntu-latest
 
-
 stages:
-- stage: Build_Server
-  displayName: Build Server
-  jobs:
-  - job: Build_Server
-    displayName: Build SCM Server
-
-    steps:
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'scm-server/pom.xml'
-        mavenOptions: '-Xmx3072m'
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.9'
-        jdkArchitectureOption: 'x64'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        goals: 'package'
-
-    - task: CopyFiles@2
-      displayName: 'Copy Jar Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-server/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: $(Build.ArtifactStagingDirectory)
-        artifactName: SpringBootBuild
-        
-    - task: CopyFilesOverSSH@0
-      displayName: 'Securely copy files to the remote machine'
-      inputs:
-        sshEndpoint: timoserver
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-server/target/*.?(war|jar)'
-        targetFolder: /home/kmcode/scm-km/test/
-        failOnEmptySource: true
-
-
 - stage: Build_Client
   displayName: Build Client
   jobs:
@@ -69,26 +37,100 @@ stages:
         npm run build
       displayName: 'npm install and build'
 
-    - task: CopyFiles@2
-      displayName: 'Copy Build Files to artifact staging directory'
+    - task: ArchiveFiles@2
       inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-client/build/**'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+        rootFolderOrFile: 'scm-client/build/'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/pw-$(buildMonth)-$(buildDay).zip'
+        replaceExistingArchive: true
+        verbose: true
 
     - task: PublishBuildArtifacts@1
       inputs:
         pathToPublish: $(Build.ArtifactStagingDirectory)
-        artifactName: ReactBuild
+        artifactName: YarnBuild_$(buildMonth)_$(buildDay)
 
-    - task: CopyFilesOverSSH@0
-      displayName: 'Securely copy files to the remote machine'
-      inputs:
-        sshEndpoint: timoserver
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/scm-client/build/**'
-        targetFolder: /home/kmcode/scm-km/test/
-        failOnEmptySource: true
+# - stage: Build_Server
+#   displayName: Build Server
+#   jobs:
+#   - job: Build_Server      
+#     displayName: Build SCM Server
+
+#     steps:
+#     - task: Maven@3
+#       inputs:
+#         mavenPomFile: 'scm-server/pom.xml'
+#         mavenOptions: '-Xmx3072m'
+#         javaHomeOption: 'JDKVersion'
+#         jdkVersionOption: '1.9'
+#         jdkArchitectureOption: 'x64'
+#         publishJUnitResults: true
+#         testResultsFiles: '**/surefire-reports/TEST-*.xml'
+#         goals: 'package'
+
+
+
+    # - task: CopyFiles@2
+    #   displayName: 'Copy Jar Files to artifact staging directory'
+    #   inputs:
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     Contents: '**/scm-server/target/*.?(war|jar)'
+    #     TargetFolder: $(Build.ArtifactStagingDirectory)
+
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     pathToPublish: $(Build.ArtifactStagingDirectory)
+    #     artifactName: SpringBootBuild
+        
+    # - task: CopyFilesOverSSH@0
+    #   displayName: 'Securely copy files to the remote machine'
+    #   inputs:
+    #     sshEndpoint: timoserver
+    #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+    #     Contents: '**/scm-server/target/*.?(war|jar)'
+    #     targetFolder: /home/kmcode/scm-km/test/
+    #     failOnEmptySource: true
+
+
+# - stage: Build_Client
+#   displayName: Build Client
+#   jobs:
+#   - job: Build_Client
+#     displayName: Build SCM Client
+
+#     steps:
+#     - task: NodeTool@0
+#       inputs:
+#         versionSpec: '16.x'
+#       displayName: 'Install Node.js'
+
+#     - script: |
+#         cd scm-client
+#         npm install
+#         npm run build
+#       displayName: 'npm install and build'
+
+#     - task: CopyFiles@2
+#       displayName: 'Copy Build Files to artifact staging directory'
+#       inputs:
+#         SourceFolder: '$(System.DefaultWorkingDirectory)'
+#         Contents: '**/scm-client/build/**'
+#         TargetFolder: $(Build.ArtifactStagingDirectory)
+
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         pathToPublish: $(Build.ArtifactStagingDirectory)
+#         artifactName: ReactBuild
+
+#     - task: CopyFilesOverSSH@0
+#       displayName: 'Securely copy files to the remote machine'
+#       inputs:
+#         sshEndpoint: timoserver
+#         SourceFolder: '$(System.DefaultWorkingDirectory)'
+#         Contents: '**/scm-client/build/**'
+#         targetFolder: /home/kmcode/scm-km/test/
+#         failOnEmptySource: true
 
 
 # - stage: Copy_to_Timos_Server

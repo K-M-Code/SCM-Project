@@ -30,13 +30,14 @@ stages:
       displayName: 'Install Node.js'
 
     - script: |
+        cd scm-client
         npm install
         npm run build
       displayName: 'npm install and build'
 
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: 'build/'
+        rootFolderOrFile: 'scm-client/build/'
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/pw-$(buildMonth)-$(buildDay).zip'
